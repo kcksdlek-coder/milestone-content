@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>타이어 공기압 점검표 | milestone.kc</title>
+<meta name="description" content="내 차 기준 공기압 찾는 법, 한 달 점검 순서, 많이 팔린 공기압 주입기.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root {
+    --bg: #0b0c0e; --panel: #15171b; --line: #272a30;
+    --text: #f2f3f5; --sub: #a2a8b0;
+    --green: #31d07f; --red: #ff3b3b;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: Pretendard, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    font-size: 17px; line-height: 1.6; word-break: keep-all;
+  }
+  main { max-width: 560px; margin: 0 auto; padding: 0 16px 56px; }
+  a { color: inherit; }
+
+  .topbar { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; font-size: 15px; font-weight: 600; }
+  .topbar .dot { color: var(--red); }
+  .pill { border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: 13px; color: var(--sub); }
+
+  .eyebrow { margin: 28px 0 8px; font-size: 13px; letter-spacing: .14em; color: var(--sub); }
+  h1 { margin: 0; font-size: clamp(40px, 12vw, 60px); line-height: 1.12; font-weight: 800; letter-spacing: -.02em; }
+  .twist { margin: 14px 0 6px; color: var(--red); font-weight: 700; font-size: 19px; }
+  .lead { margin: 0; color: var(--sub); }
+
+  nav { display: flex; gap: 8px; margin: 26px 0 8px; }
+  nav a { flex: 1; text-align: center; text-decoration: none; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 4px; font-size: 14px; font-weight: 600; }
+
+  section { padding-top: 40px; }
+  .badge { display: inline-block; border-radius: 6px; padding: 3px 10px; font-size: 13px; font-weight: 700; color: #08110c; background: var(--green); }
+  .badge.red { background: var(--red); color: #fff; }
+  h2 { margin: 12px 0 10px; font-size: 28px; line-height: 1.25; font-weight: 800; letter-spacing: -.01em; }
+  h3 { margin: 26px 0 8px; font-size: 17px; font-weight: 700; color: var(--sub); }
+  p { margin: 0 0 12px; }
+  .g { color: var(--green); font-weight: 700; }
+  .r { color: var(--red); font-weight: 700; }
+
+  .order { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; counter-reset: n; }
+  .order li { counter-increment: n; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; font-weight: 700; }
+  .order li::before { content: counter(n); display: inline-block; width: 26px; height: 26px; margin-right: 10px; border-radius: 50%; background: var(--green); color: #08110c; text-align: center; line-height: 26px; font-size: 14px; font-weight: 800; }
+  .order small { display: block; margin: 4px 0 0 36px; color: var(--sub); font-weight: 400; font-size: 15px; }
+
+  .warn { margin-top: 12px; border: 1px solid var(--red); border-radius: 12px; padding: 14px 16px; font-size: 16px; }
+
+  details { margin-top: 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+  summary { padding: 16px; font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--green); font-size: 22px; line-height: 1; }
+  details[open] summary::after { content: "−"; }
+  .inner { padding: 0 16px 16px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 16px; font-variant-numeric: tabular-nums; }
+  th, td { padding: 10px 4px; border-bottom: 1px solid var(--line); text-align: right; }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { color: var(--sub); font-size: 13px; font-weight: 600; }
+  tbody td:first-child small { display: block; color: var(--sub); font-size: 13px; }
+  tbody td:not(:first-child) { color: var(--green); font-weight: 700; white-space: nowrap; }
+
+  .tips { margin: 14px 0 0; padding-left: 20px; font-size: 16px; }
+  .tips li { margin: 4px 0; }
+  .inch { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 0; padding: 0; list-style: none; font-size: 14px; }
+  .inch li { border: 1px solid var(--line); border-radius: 8px; padding: 3px 8px; }
+
+  .disclosure { margin: 0 0 14px; color: var(--sub); font-size: 14px; }
+  .products { display: grid; gap: 10px; }
+  .product { display: grid; grid-template-columns: 96px 1fr; column-gap: 14px; align-items: start; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  .product img { width: 96px; height: 96px; object-fit: contain; background: #fff; border-radius: 10px; }
+  .product .btn { grid-column: 1 / -1; }
+  .product .tag { display: inline-block; font-size: 13px; font-weight: 700; color: var(--green); }
+  .product h3 { margin: 4px 0 6px; font-size: 19px; color: var(--text); }
+  .product p { margin: 0; font-size: 16px; color: var(--sub); }
+  .product .meta { margin-top: 8px; font-size: 14px; color: var(--text); }
+
+  .btn { display: block; width: 100%; margin-top: 12px; padding: 14px; border: 0; border-radius: 12px; font: inherit; font-weight: 700; text-align: center; text-decoration: none; cursor: pointer; }
+  .btn.primary { background: var(--red); color: #fff; }
+  .btn.ghost { background: var(--bg); color: var(--text); border: 1px solid var(--line); }
+  .btn:focus-visible, nav a:focus-visible, summary:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+
+  footer { margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .src { margin-top: 18px; color: var(--sub); font-size: 13px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="topbar"><span><span class="dot">●</span> milestone.kc</span><span class="pill">자료</span></div>
+
+  <p class="eyebrow">TIRE CHECK GUIDE</p>
+  <h1>공기압,<br>한 달에 한 번</h1>
+  <p class="twist">경고등이 켜졌을 땐 이미 많이 빠진 뒤입니다.</p>
+  <p class="lead">내 차에 맞는 공기압을 찾는 법과 집에서 재는 순서를 정리했습니다. 아래에 많이 팔리는 공기압 주입기도 모았습니다.</p>
+
+  <nav aria-label="바로 가기">
+    <a href="#rule">① 기준 수치</a>
+    <a href="#check">② 점검 순서</a>
+    <a href="#pick">③ 주입기</a>
+  </nav>
+
+  <section id="rule">
+    <span class="badge">기준부터</span>
+    <h2>내 차 기준 공기압 찾는 곳</h2>
+    <ol class="order">
+      <li>운전석 문 안쪽 스티커<small>문을 열면 보이는 문 끝이나 기둥(B필러)에 붙어 있습니다. 차종에 따라 주유구 덮개나 트렁크에 있기도 합니다. 앞·뒤 바퀴 수치가 다를 수 있습니다.</small></li>
+      <li>차량 설명서<small>스티커가 안 보이면 설명서의 "타이어" 항목에 같은 수치가 있습니다.</small></li>
+      <li>타이어 옆면 숫자는 기준이 아닙니다<small>옆면에 적힌 "MAX PRESS"는 타이어가 견디는 <span class="r">최대값</span>입니다. 이 숫자에 맞추면 공기가 너무 많이 들어갑니다.</small></li>
+    </ol>
+    <p class="warn">단위가 달라도 놀라지 마세요. <b>1bar ≈ 14.5psi ≈ 100kPa</b> 입니다. 예를 들어 36psi는 약 2.5bar, 250kPa 입니다.</p>
+  </section>
+
+  <section>
+    <details id="check" open>
+      <summary>한 달에 한 번 점검 순서</summary>
+      <div class="inner">
+        <ol class="tips">
+          <li><b>식었을 때 잽니다.</b> 차를 3시간 이상 세워 둔 뒤, 아침 출발 전이 가장 좋습니다. 달린 직후에는 타이어가 데워져 실제보다 높게 나옵니다.</li>
+          <li>밸브 캡을 열고 측정기(또는 주입기 노즐)를 꾹 눌러 끼웁니다.</li>
+          <li>문 안쪽 스티커 수치와 비교합니다. 모자라면 채우고, 넘치면 밸브 가운데 심을 살짝 눌러 뺍니다.</li>
+          <li>네 바퀴 모두 하고, 밸브 캡을 다시 닫습니다. 스페어 타이어가 있으면 같이 봅니다.</li>
+          <li>날이 추워지면 공기압도 함께 내려갑니다. 계절이 바뀔 때는 한 번 더 확인하세요.</li>
+        </ol>
+        <p class="src">경고등(TPMS)은 미국 기준(FMVSS 138)으로 권장값보다 25% 넘게 빠져야 켜지도록 정해져 있습니다. 경고등이 꺼져 있어도 직접 재는 것이 좋습니다.</p>
+      </div>
+    </details>
+  </section>
+
+  <section id="pick">
+    <span class="badge red">많이 팔린 순</span>
+    <h2>많이 팔린 공기압 주입기</h2>
+    <p class="disclosure">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
+    <!-- 2026-11-14 쿠팡 "타이어 공기주입기" 판매량순 중 자동차용 4종(자전거 펌프 제외). 파트너스 링크 11/14 -->
+    <div class="products">
+      <div class="product">
+        <img src="https://thumbnail.coupangcdn.com/thumbnails/remote/657x657q90trim/image/vendor_inventory/6cda/0686727879dbe76db5ec6a7a9ff22d505599f01a5a9a12d24b022e085c62.jpg" alt="아우리넥스 휴대용 셀프 타이어 공기압 주입기" width="96" height="96" loading="lazy">
+        <div>
+          <span class="tag">판매량순 1위</span>
+          <h3>아우리넥스 휴대용 셀프 타이어 공기압 주입기</h3>
+          <p>손에 들고 쓰는 휴대용 주입기입니다.</p>
+          <p class="meta">목표 공기압 설정·자동 멈춤 여부는 상세 페이지에서 확인</p>
+        </div>
+        <a class="btn ghost" href="https://link.coupang.com/a/iE6m5lNMHs" rel="sponsored noopener" target="_blank">쿠팡에서 보기</a>
+      </div>
+      <div class="product">
+        <img src="https://thumbnail.coupangcdn.com/thumbnails/remote/657x657q90trim/image/vendor_inventory/3723/416d30f0b8b4d78fc7b46272b593dbeea9057b4c7ca4d3bee5b475ea3dfc.jpg" alt="벤딕트 무선 공기압 주입기" width="96" height="96" loading="lazy">
+        <div>
+          <span class="tag">판매량순 상위 · 무선</span>
+          <h3>벤딕트 무선 공기압 주입기</h3>
+          <p>충전해서 선 없이 쓰는 무선형입니다.</p>
+          <p class="meta">목표 공기압 설정·자동 멈춤 여부는 상세 페이지에서 확인</p>
+        </div>
+        <a class="btn ghost" href="https://link.coupang.com/a/iE6ng3m1NQ" rel="sponsored noopener" target="_blank">쿠팡에서 보기</a>
+      </div>
+      <div class="product">
+        <img src="https://thumbnail.coupangcdn.com/thumbnails/remote/657x657q90trim/image/retail/images/236724880482360-36796444-86fd-4f36-840b-647792a63f74.jpg" alt="메이튼 무선 타이어 공기압 주입기 6000mAh" width="96" height="96" loading="lazy">
+        <div>
+          <span class="tag">판매량순 상위 · 무선</span>
+          <h3>메이튼 무선 타이어 공기압 주입기 6000mAh</h3>
+          <p>배터리 6000mAh 올인원 세트입니다.</p>
+          <p class="meta">목표 공기압 설정·자동 멈춤 여부는 상세 페이지에서 확인</p>
+        </div>
+        <a class="btn ghost" href="https://link.coupang.com/a/iE6nspNaMu" rel="sponsored noopener" target="_blank">쿠팡에서 보기</a>
+      </div>
+      <div class="product">
+        <img src="https://thumbnail.coupangcdn.com/thumbnails/remote/657x657q90trim/image/vendor_inventory/3a66/e9e78b360cd6621eb93daae43a73d53e231b71ed87b1ec3a69d1bdd9208c.jpg" alt="불스원 차량용 타이어 공기압 주입기 6000mAh" width="96" height="96" loading="lazy">
+        <div>
+          <span class="tag">판매량순 상위 · 무선</span>
+          <h3>불스원 차량용 타이어 공기압 주입기 6000mAh</h3>
+          <p>차량용품 브랜드의 무선 주입기입니다.</p>
+          <p class="meta">목표 공기압 설정·자동 멈춤 여부는 상세 페이지에서 확인</p>
+        </div>
+        <a class="btn ghost" href="https://link.coupang.com/a/iE6nD7HKeX" rel="sponsored noopener" target="_blank">쿠팡에서 보기</a>
+      </div>
+    </div>
+    <p class="src">선정 기준: 쿠팡 "타이어 공기주입기" 검색 판매량순 상위(2026년 11월 14일 조회) 중 자동차 타이어용 제품. 성능을 평가한 순위가 아닙니다. 가격과 순위는 바뀔 수 있습니다. 주입기에 표시되는 수치도 오차가 있을 수 있으니, 처음엔 정비소 측정값과 한 번 비교해 보세요.</p>
+  </section>
+
+  <footer>
+    <button class="btn primary" id="share" type="button">운전하는 가족에게 보내기</button>
+    <a class="btn ghost" href="https://www.instagram.com/milestone.kc/">@milestone.kc 다음 자료도 받기</a>
+    <p class="src">출처: 미국 도로교통안전국(NHTSA) 타이어 안전 안내 · FMVSS 138 · 미국 에너지부(fueleconomy.gov)</p>
+  </footer>
+</main>
+<script>
+  // 접힌 항목으로 가는 바로 가기를 누르면 펼친다
+  document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('click', () => {
+    const d = document.querySelector(a.hash);
+    if (d && d.tagName === 'DETAILS') d.open = true;
+  }));
+  document.getElementById('share').addEventListener('click', async (e) => {
+    const data = { title: document.title, url: location.href };
+    if (navigator.share) { try { await navigator.share(data); } catch {} return; }
+    await navigator.clipboard.writeText(location.href);
+    e.target.textContent = '링크를 복사했습니다';
+  });
+</script>
+</body>
+</html>
