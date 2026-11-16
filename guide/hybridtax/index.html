@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>하이브리드 차종별 출고 기간표 | milestone.kc</title>
+<meta name="description" content="하이브리드 개소세 감면은 12월 31일 출고분까지(정부안). 현대차·기아 하이브리드 13종의 11월 기본 출고 기간.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root {
+    --bg: #0b0c0e; --panel: #15171b; --line: #272a30;
+    --text: #f2f3f5; --sub: #a2a8b0;
+    --green: #31d07f; --red: #ff3b3b;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: Pretendard, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    font-size: 17px; line-height: 1.6; word-break: keep-all;
+  }
+  main { max-width: 560px; margin: 0 auto; padding: 0 16px 56px; }
+  a { color: inherit; }
+
+  .topbar { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; font-size: 15px; font-weight: 600; }
+  .topbar .dot { color: var(--red); }
+  .pill { border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: 13px; color: var(--sub); }
+
+  .eyebrow { margin: 28px 0 8px; font-size: 13px; letter-spacing: .14em; color: var(--sub); }
+  h1 { margin: 0; font-size: clamp(40px, 12vw, 60px); line-height: 1.12; font-weight: 800; letter-spacing: -.02em; }
+  .twist { margin: 14px 0 6px; color: var(--red); font-weight: 700; font-size: 19px; }
+  .lead { margin: 0; color: var(--sub); }
+
+  nav { display: flex; gap: 8px; margin: 26px 0 8px; }
+  nav a { flex: 1; text-align: center; text-decoration: none; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 4px; font-size: 14px; font-weight: 600; }
+
+  section { padding-top: 40px; }
+  .badge { display: inline-block; border-radius: 6px; padding: 3px 10px; font-size: 13px; font-weight: 700; color: #08110c; background: var(--green); }
+  .badge.red { background: var(--red); color: #fff; }
+  h2 { margin: 12px 0 10px; font-size: 28px; line-height: 1.25; font-weight: 800; letter-spacing: -.01em; }
+  h3 { margin: 26px 0 8px; font-size: 17px; font-weight: 700; color: var(--sub); }
+  p { margin: 0 0 12px; }
+  .g { color: var(--green); font-weight: 700; }
+  .r { color: var(--red); font-weight: 700; }
+
+  .order { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; counter-reset: n; }
+  .order li { counter-increment: n; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; font-weight: 700; }
+  .order li::before { content: counter(n); display: inline-block; width: 26px; height: 26px; margin-right: 10px; border-radius: 50%; background: var(--green); color: #08110c; text-align: center; line-height: 26px; font-size: 14px; font-weight: 800; }
+  .order small { display: block; margin: 4px 0 0 36px; color: var(--sub); font-weight: 400; font-size: 15px; }
+
+  .warn { margin-top: 12px; border: 1px solid var(--red); border-radius: 12px; padding: 14px 16px; font-size: 16px; }
+
+  details { margin-top: 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+  summary { padding: 16px; font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--green); font-size: 22px; line-height: 1; }
+  details[open] summary::after { content: "−"; }
+  .inner { padding: 0 16px 16px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 16px; font-variant-numeric: tabular-nums; }
+  th, td { padding: 10px 4px; border-bottom: 1px solid var(--line); text-align: right; }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { color: var(--sub); font-size: 13px; font-weight: 600; }
+  tbody td:first-child small { display: block; color: var(--sub); font-size: 13px; }
+  tbody td:not(:first-child) { color: var(--green); font-weight: 700; white-space: nowrap; }
+
+  .tips { margin: 14px 0 0; padding-left: 20px; font-size: 16px; }
+  .tips li { margin: 4px 0; }
+  .inch { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 0; padding: 0; list-style: none; font-size: 14px; }
+  .inch li { border: 1px solid var(--line); border-radius: 8px; padding: 3px 8px; }
+
+  .disclosure { margin: 0 0 14px; color: var(--sub); font-size: 14px; }
+  .products { display: grid; gap: 10px; }
+  .product { display: grid; grid-template-columns: 96px 1fr; column-gap: 14px; align-items: start; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  .product img { width: 96px; height: 96px; object-fit: contain; background: #fff; border-radius: 10px; }
+  .product .btn { grid-column: 1 / -1; }
+  .product .tag { display: inline-block; font-size: 13px; font-weight: 700; color: var(--green); }
+  .product h3 { margin: 4px 0 6px; font-size: 19px; color: var(--text); }
+  .product p { margin: 0; font-size: 16px; color: var(--sub); }
+  .product .meta { margin-top: 8px; font-size: 14px; color: var(--text); }
+
+  .btn { display: block; width: 100%; margin-top: 12px; padding: 14px; border: 0; border-radius: 12px; font: inherit; font-weight: 700; text-align: center; text-decoration: none; cursor: pointer; }
+  .btn.primary { background: var(--red); color: #fff; }
+  .btn.ghost { background: var(--bg); color: var(--text); border: 1px solid var(--line); }
+  .btn:focus-visible, nav a:focus-visible, summary:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+
+  footer { margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .src { margin-top: 18px; color: var(--sub); font-size: 13px; }
+  tbody td.late { color: var(--red); }
+  tbody tr.grp td { padding-top: 22px; color: var(--sub); font-size: 13px; font-weight: 700; text-align: left; border-bottom: 1px solid var(--line); }
+  .asof { margin: 0 0 12px; color: var(--sub); font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="topbar"><span><span class="dot">●</span> milestone.kc</span><span class="pill">자료</span></div>
+
+  <p class="eyebrow">HYBRID DELIVERY TABLE</p>
+  <h1>내 하이브리드,<br>올해 안에 나올까</h1>
+  <p class="twist">개소세 감면은 12월 31일 출고분까지입니다. (정부안, 국회 확정 전)</p>
+  <p class="lead">출고가 해를 넘기면 세금이 최대 약 100만 원 늘 수 있습니다. 현대차·기아 하이브리드 13종의 11월 기본 출고 기간을 한 장에 모았습니다.</p>
+
+  <nav aria-label="바로 가기">
+    <a href="#table">① 출고 기간표</a>
+    <a href="#ask">② 계약 전 질문</a>
+    <a href="#tax">③ 세금 계산</a>
+  </nav>
+
+  <section id="table">
+    <span class="badge red">2026년 11월 초 기준</span>
+    <h2>하이브리드 차종별 기본 출고 기간</h2>
+    <p class="asof">오른쪽 칸은 오늘 계약했을 때 기본 기간을 그대로 더한 날짜입니다. 12월 31일을 넘으면 빨간색으로 표시됩니다.</p>
+    <table>
+      <thead><tr><th>차종</th><th>기본 기간</th><th>오늘 계약하면</th></tr></thead>
+      <tbody>
+<tr class="grp"><td colspan="3">기본 기간 1개월 이내</td></tr>
+        <tr><td>그랜저 하이브리드<small>재고 없으면 약 3주</small></td><td>즉시</td><td class="eta" data-days="0">-</td></tr>
+        <tr><td>싼타페 하이브리드<small>재고 배정되면 즉시</small></td><td>3주</td><td class="eta" data-days="21">-</td></tr>
+        <tr><td>팰리세이드 하이브리드</td><td>3주</td><td class="eta" data-days="21">-</td></tr>
+        <tr><td>스타리아 하이브리드</td><td>3주</td><td class="eta" data-days="21">-</td></tr>
+        <tr><td>쏘나타 하이브리드</td><td>1개월</td><td class="eta" data-days="30">-</td></tr>
+        <tr><td>코나 하이브리드</td><td>1개월</td><td class="eta" data-days="30">-</td></tr>
+<tr class="grp"><td colspan="3">약 4~5주</td></tr>
+        <tr><td>쏘렌토 하이브리드</td><td>약 4~5주</td><td class="eta" data-days="35">-</td></tr>
+        <tr><td>니로 하이브리드</td><td>약 4~5주</td><td class="eta" data-days="35">-</td></tr>
+        <tr><td>카니발 하이브리드<small>하이리무진·X-Line 일부는 더 김</small></td><td>약 4~5주</td><td class="eta" data-days="35">-</td></tr>
+<tr class="grp"><td colspan="3">1.5개월 이상</td></tr>
+        <tr><td>스포티지 하이브리드</td><td>약 1.5개월</td><td class="eta" data-days="45">-</td></tr>
+        <tr><td>아반떼 하이브리드</td><td>2개월</td><td class="eta" data-days="60">-</td></tr>
+        <tr><td>투싼 하이브리드</td><td>4개월</td><td class="eta" data-days="120">-</td></tr>
+        <tr><td>셀토스 하이브리드</td><td>약 4개월</td><td class="eta" data-days="120">-</td></tr>
+      </tbody>
+    </table>
+    <p class="warn"><b>이 표는 참고용입니다.</b> 트림·옵션·색상과 영업점 재고에 따라 실제 출고일은 달라집니다. 비선호 사양은 4~5주가 더 걸릴 수 있습니다. 계약 전에 영업점에서 출고 예정일을 꼭 확인하세요.</p>
+  </section>
+
+  <section>
+    <details id="ask" open>
+      <summary>계약 전에 영업사원에게 물어볼 것</summary>
+      <div class="inner">
+        <ol class="tips">
+          <li><b>"이 사양, 출고 예정일이 12월 31일 안인가요?"</b> 계약일이 아니라 출고일이 기준입니다.</li>
+          <li><b>"같은 사양으로 재고차나 즉시 출고 차가 있나요?"</b> 재고가 배정되면 대기 없이 받을 수 있습니다.</li>
+          <li><b>"옵션이나 색상을 바꾸면 더 빨라지나요?"</b> 선호 사양일수록 생산이 빠릅니다.</li>
+          <li><b>"출고가 내년으로 넘어가면 견적이 얼마나 달라지나요?"</b> 견적서의 개별소비세 항목을 같이 보세요.</li>
+        </ol>
+      </div>
+    </details>
+  </section>
+
+  <section>
+    <details id="tax">
+      <summary>왜 약 100만 원인가</summary>
+      <div class="inner">
+        <table>
+          <thead><tr><th>항목</th><th>금액</th></tr></thead>
+          <tbody>
+            <tr><td>개별소비세 감면 한도</td><td>70만 원</td></tr>
+            <tr><td>교육세<small>개별소비세의 30%</small></td><td>21만 원</td></tr>
+            <tr><td>부가세<small>위 둘을 합한 금액의 10%</small></td><td>9.1만 원</td></tr>
+            <tr><td><b>합계</b></td><td>약 100만 원</td></tr>
+          </tbody>
+        </table>
+        <p class="src">감면 한도를 꽉 채워 받는 차 기준의 최대치입니다. 하이브리드 개소세 감면 종료는 정부의 2026년 세제개편안(8월 3일 발표)에 담긴 내용이고, 국회 세법 심의를 거쳐야 확정됩니다. 1년 연장하는 법안도 발의돼 있습니다.</p>
+      </div>
+    </details>
+  </section>
+
+  <footer>
+    <button class="btn primary" id="share" type="button">하이브리드 살 친구에게 보내기</button>
+    <a class="btn ghost" href="https://www.instagram.com/milestone.kc/">@milestone.kc 다음 자료도 받기</a>
+    <p class="src">출고 기간 출처: 오토트리뷴 「현대차, 11월 차종별 출고 일정」(2026.11.02), 「기아, 연내 인수 가능 차종별 출고 일정」(2026.11.02), 「기아 하이브리드 SUV, 차종별 출고 일정」(2026.11.04). 제조사 공식 발표가 아니라 보도를 정리한 것입니다.<br>세금 출처: 재정경제부 2026년 세제개편안, 조세특례제한법 제109조, 세계일보·헤럴드경제 보도.</p>
+  </footer>
+</main>
+<script>
+  // 오늘 날짜에 기본 기간(일)을 더해 보여 준다. 12월 31일을 넘으면 빨간색.
+  // ponytail: 기간의 긴 쪽(4~5주→35일)을 그대로 더한 단순 계산. 영업일·재고는 반영하지 않는다.
+  const end = new Date(2026, 11, 31, 23, 59);
+  document.querySelectorAll('.eta').forEach((td) => {
+    if (td.dataset.days === '0') { td.textContent = '재고 있으면 바로'; return; }
+    const d = new Date(); d.setDate(d.getDate() + Number(td.dataset.days));
+    td.textContent = (d.getFullYear() > 2026 ? '내년 ' : '') + (d.getMonth() + 1) + '월 ' + d.getDate() + '일쯤';
+    if (d > end) td.classList.add('late');
+  });
+  document.querySelectorAll('a[href^="#"]').forEach((a) => a.addEventListener('click', () => {
+    const d = document.querySelector(a.hash);
+    if (d && d.tagName === 'DETAILS') d.open = true;
+  }));
+  document.getElementById('share').addEventListener('click', async (e) => {
+    const data = { title: document.title, url: location.href };
+    if (navigator.share) { try { await navigator.share(data); } catch {} return; }
+    await navigator.clipboard.writeText(location.href);
+    e.target.textContent = '링크를 복사했습니다';
+  });
+</script>
+</body>
+</html>
